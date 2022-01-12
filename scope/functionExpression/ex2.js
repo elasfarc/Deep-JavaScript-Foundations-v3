@@ -9,6 +9,16 @@ const printRecords = (recordIds) =>
     )
     .forEach((record) => console.log(record));
 
+const paidStudentsToEnroll = () => [
+  ...currentEnrollment,
+  ...studentRecords
+    .filter(
+      (record) =>
+        record.paid && currentEnrollment.every((id) => record.id != id)
+    )
+    .map((record) => record.id),
+];
+
 // ********************************
 
 var currentEnrollment = [410, 105, 664, 375];
@@ -26,10 +36,10 @@ var studentRecords = [
 ];
 
 printRecords(currentEnrollment);
-// console.log("----");
-// currentEnrollment = paidStudentsToEnroll();
-// printRecords(currentEnrollment);
-// console.log("----");
+console.log("----");
+currentEnrollment = paidStudentsToEnroll();
+printRecords(currentEnrollment);
+console.log("----");
 // remindUnpaid(currentEnrollment);
 
 /*

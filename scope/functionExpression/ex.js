@@ -38,6 +38,19 @@ function paidStudentsToEnroll() {
   }
 }
 
+function remindUnpaid(recordIds) {
+  const unpaidStudents = recordIds
+    .map(idToRecord)
+    .filter(isUnpaid)
+    .map(recordToId);
+  printRecords(unpaidStudents);
+
+  // ********
+  function isUnpaid(record) {
+    return !record.paid;
+  }
+}
+
 // ********************************
 function idToRecord(id) {
   return studentRecords.find(function findRecordById(record) {

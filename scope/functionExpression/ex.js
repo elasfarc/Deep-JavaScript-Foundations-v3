@@ -19,6 +19,25 @@ function printRecords(recordIds) {
   }
 }
 
+function paidStudentsToEnroll() {
+  const paidNotEnrolledStudentIds = studentRecords
+    .filter(isPaidAndNotEnrolled)
+    .map(recordToId);
+
+  return [...currentEnrollment, ...paidNotEnrolledStudentIds];
+
+  //* *************** */
+  function isPaidAndNotEnrolled(record) {
+    const isPaid = record.paid;
+    const isNotEnrolled = currentEnrollment.every(function isStudentNotEnrolled(
+      id
+    ) {
+      return record.id != id;
+    });
+    return isPaid && isNotEnrolled;
+  }
+}
+
 // ********************************
 function idToRecord(id) {
   return studentRecords.find(function findRecordById(record) {

@@ -19,6 +19,14 @@ const paidStudentsToEnroll = () => [
     .map((record) => record.id),
 ];
 
+const remindUnpaid = (recordIds) =>
+  printRecords(
+    recordIds
+      .map((id) => studentRecords.find((record) => record.id == id))
+      .filter((record) => !record.paid)
+      .map((record) => record.id)
+  );
+
 // ********************************
 
 var currentEnrollment = [410, 105, 664, 375];
@@ -40,7 +48,7 @@ console.log("----");
 currentEnrollment = paidStudentsToEnroll();
 printRecords(currentEnrollment);
 console.log("----");
-// remindUnpaid(currentEnrollment);
+remindUnpaid(currentEnrollment);
 
 /*
 	Bob (664): Not Paid
